@@ -3,13 +3,13 @@
 use App\Application;
 
 /**
- * Create The Application
+ * Create the application
  *
  * @var Application $app
  */
 $app = require __DIR__ . '/../bootstrap/app.php';
 
 /**
- * Run The Application
+ * Run the application
  */
 $app->run();

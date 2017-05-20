@@ -8,20 +8,19 @@ namespace App\Router;
 interface RouteInterface
 {
     /**
-     * @param $controller
-     * @return string
+     * @return null|string
      */
-    public function getController(): string;
+    public function getController(): ?string;
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getAction(): string;
+    public function getAction(): ?string;
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getPattern(): string;
+    public function getPattern(): ?string;
 
     /**
      * @return int

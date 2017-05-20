@@ -13,6 +13,16 @@ class Group implements GroupInterface
     private $routes = [];
 
     /**
+     * Group constructor.
+     *
+     * @param RouteInterface[] $routes
+     */
+    public function __construct(array $routes = [])
+    {
+        $this->routes = $routes;
+    }
+
+    /**
      * @return RouteInterface[]
      */
     public function getRoutes(): array

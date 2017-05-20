@@ -7,10 +7,10 @@ namespace App\Router;
  */
 class Route implements RouteInterface
 {
-    const METHOD_GET = 1;
-    const METHOD_POST = 2;
-    const METHOD_PUT = 3;
-    const METHOD_DELETE = 4;
+    public const METHOD_GET = 1;
+    public const METHOD_POST = 2;
+    public const METHOD_PUT = 3;
+    public const METHOD_DELETE = 4;
 
     /**
      * @var string
@@ -30,47 +30,46 @@ class Route implements RouteInterface
     /**
      * @var int
      */
-    private $method;
+    private $method = self::METHOD_GET;
 
     /**
      * Route constructor.
-     *
-     * @param string $controller
-     * @param string $action
-     * @param string $pattern
-     * @param int $method
+     * @param null|string $controller
+     * @param null|string $action
+     * @param null|string $pattern
+     * @param int|null $method
      */
-    public function __construct(string $controller,
-                                string $action,
-                                string $pattern,
-                                int $method = self::METHOD_GET)
+    public function __construct(?string $controller = null,
+                                ?string $action = null,
+                                ?string $pattern = null,
+                                ?int $method = null)
     {
         $this->controller = $controller;
         $this->action = $action;
         $this->pattern = $pattern;
-        $this->method = $method;
+        $this->method = $method ?? $this->method;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getController(): string
+    public function getController(): ?string
     {
         return $this->controller;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getAction(): string
+    public function getAction(): ?string
     {
         return $this->action;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getPattern(): string
+    public function getPattern(): ?string
     {
         return $this->pattern;
     }

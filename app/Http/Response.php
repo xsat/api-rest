@@ -126,11 +126,11 @@ class Response implements ResponseInterface, ContentInterface
 
     /**
      * @param int $code
-     * @param string|null $message
+     * @param null|string $message
      *
      * @return ResponseInterface
      */
-    public function setStatusCode(int $code, string $message = null): ResponseInterface
+    public function setStatusCode(int $code, ?string $message = null): ResponseInterface
     {
         if ($message === null) {
             $message = isset(static::$statusCodeMessages[$code]) ? static::$statusCodeMessages[$code] : null;
@@ -142,11 +142,11 @@ class Response implements ResponseInterface, ContentInterface
 
     /**
      * @param string $contentType
-     * @param string|null $charset
+     * @param null|string $charset
      *
      * @return ResponseInterface
      */
-    public function setContentType(string $contentType, string $charset = null): ResponseInterface
+    public function setContentType(string $contentType, ?string $charset = null): ResponseInterface
     {
         if ($charset === null) {
             return $this->setHeader('Content-Type', $contentType);
@@ -157,11 +157,11 @@ class Response implements ResponseInterface, ContentInterface
 
     /**
      * @param string $name
-     * @param mixed $value
+     * @param null|string $value
      *
      * @return ResponseInterface
      */
-    public function setHeader(string $name, $value = null): ResponseInterface
+    public function setHeader(string $name, ?string $value = null): ResponseInterface
     {
         if ($value == null) {
             header($name);

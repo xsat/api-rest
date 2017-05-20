@@ -53,7 +53,7 @@ class Request implements RequestInterface
      */
     public function get(string $name, $defaultValue = null)
     {
-        return isset($_REQUEST[$name]) ? $_REQUEST[$name] : null;
+        return $_REQUEST[$name] ?? null;
     }
 
     /**
@@ -66,7 +66,7 @@ class Request implements RequestInterface
      */
     public function getPost(string $name, $defaultValue = null)
     {
-        return isset($_POST[$name]) ? $_POST[$name] : null;
+        return $_POST[$name] ?? null;
     }
 
     /**
@@ -79,6 +79,6 @@ class Request implements RequestInterface
      */
     public function getQuery(string $name, $defaultValue = null)
     {
-        return isset($_GET[$name]) ? $_GET[$name] : null;
+        return $_GET[$name] ?? null;
     }
 }

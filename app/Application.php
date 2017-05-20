@@ -8,7 +8,9 @@ use App\Http\Request;
 use App\Http\RequestInterface;
 use App\Http\Response;
 use App\Http\ResponseInterface;
+use App\Router\GroupInterface;
 use App\Router\Route;
+use Exception;
 
 /**
  * Class Application
@@ -32,8 +34,10 @@ class Application
 
     /**
      * Application constructor.
+     *
+     * @param GroupInterface $group
      */
-    public function __construct()
+    public function __construct(GroupInterface $group)
     {
         $this->request = new Request();
         $this->response = new Response();
@@ -41,7 +45,7 @@ class Application
             $this->request,
             $this->response,
             new Route(ErrorController::class, 'notFound', ''),
-            include __DIR__ . '/routes.php'
+            $group
         );
     }
 
@@ -50,8 +54,12 @@ class Application
      */
     public function run()
     {
-        $this->dispatcher->dispatch();
+        try {
+            $this->dispatcher->dispatch();
 
-        echo $this->response->getContent();
+            echo $this->response->getContent();
+        } catch (Exception $exception) {
+            echo $exception->getMessage();
+        }
     }
 }

@@ -19,8 +19,12 @@ class TestController extends Controller
         ]);
     }
 
-    public function itemAction($id) {
-        return $this->response->setJsonContent([
+    /**
+     * @param int $id
+     */
+    public function itemAction(int $id)
+    {
+        $this->response->setJsonContent([
             'item_id' => $id,
         ]);
     }

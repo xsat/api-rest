@@ -46,10 +46,12 @@ class Dispatcher implements DispatcherInterface
      * @param RouteInterface $route
      * @param GroupInterface $group
      */
-    public function __construct(RequestInterface $request,
-                                ResponseInterface $response,
-                                RouteInterface $route,
-                                GroupInterface $group)
+    public function __construct(
+        RequestInterface $request,
+        ResponseInterface $response,
+        RouteInterface $route,
+        GroupInterface $group
+    )
     {
         $this->request = $request;
         $this->response = $response;

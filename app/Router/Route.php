@@ -39,10 +39,12 @@ class Route implements RouteInterface
      * @param null|string $pattern
      * @param int|null $method
      */
-    public function __construct(?string $controller = null,
-                                ?string $action = null,
-                                ?string $pattern = null,
-                                ?int $method = null)
+    public function __construct(
+        ?string $controller = null,
+        ?string $action = null,
+        ?string $pattern = null,
+        ?int $method = null
+    )
     {
         $this->controller = $controller;
         $this->action = $action;

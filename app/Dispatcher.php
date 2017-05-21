@@ -60,7 +60,7 @@ class Dispatcher implements DispatcherInterface
     }
 
     /**
-     * Create controller and call action
+     * Creates a controller and handles an action
      */
     public function dispatch()
     {

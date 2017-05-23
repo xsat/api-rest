@@ -41,8 +41,6 @@ class Connection implements ConnectionInterface
      */
     public function selectOne(string $query, array $bindings = []): array
     {
-        // TODO: Implement selectOne() method.
-
         return [];
     }
 
@@ -52,10 +50,8 @@ class Connection implements ConnectionInterface
      *
      * @return array
      */
-    public function selectAll(string $query, array $bindings = []): array
+    public function select(string $query, array $bindings = []): array
     {
-        // TODO: Implement selectAll() method.
-
         return [];
     }
 
@@ -67,8 +63,6 @@ class Connection implements ConnectionInterface
      */
     public function insert(string $query, array $bindings = []): bool
     {
-        // TODO: Implement insert() method.
-
         return false;
     }
 

@@ -2,16 +2,13 @@
 
 namespace App\Router;
 
+use App\Http\Request;
+
 /**
  * Class Route
  */
 class Route implements RouteInterface
 {
-    public const METHOD_GET = 1;
-    public const METHOD_POST = 2;
-    public const METHOD_PUT = 3;
-    public const METHOD_DELETE = 4;
-
     /**
      * @var string
      */
@@ -28,22 +25,22 @@ class Route implements RouteInterface
     private $pattern;
 
     /**
-     * @var int
+     * @var string
      */
-    private $method = self::METHOD_GET;
+    private $method = Request::METHOD_GET;
 
     /**
      * Route constructor.
      * @param null|string $controller
      * @param null|string $action
      * @param null|string $pattern
-     * @param int|null $method
+     * @param null|string $method
      */
     public function __construct(
         ?string $controller = null,
         ?string $action = null,
         ?string $pattern = null,
-        ?int $method = null
+        ?string $method = null
     )
     {
         $this->controller = $controller;
@@ -77,9 +74,9 @@ class Route implements RouteInterface
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getMethod(): int
+    public function getMethod(): string
     {
         return $this->method;
     }

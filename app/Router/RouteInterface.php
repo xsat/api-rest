@@ -23,7 +23,7 @@ interface RouteInterface
     public function getPattern(): ?string;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getMethod(): int;
+    public function getMethod(): string;
 }

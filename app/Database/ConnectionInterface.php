@@ -21,7 +21,7 @@ interface ConnectionInterface
      *
      * @return array
      */
-    public function selectAll(string $query, array $bindings = []): array;
+    public function select(string $query, array $bindings = []): array;
 
     /**
      * @param string $query

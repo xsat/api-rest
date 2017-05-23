@@ -30,6 +30,13 @@ interface RequestInterface
 
     /**
      * @param string $name
+     *
+     * @return bool
+     */
+    public function hasPut(string $name): bool;
+
+    /**
+     * @param string $name
      * @param mixed $default
      *
      * @return mixed
@@ -51,4 +58,17 @@ interface RequestInterface
      * @return mixed
      */
     public function getQuery(string $name, $default = null);
+
+    /**
+     * @param string $name
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    public function getPut(string $name, $default = null);
+
+    /**
+     * @return int
+     */
+    public function getMethod(): string;
 }

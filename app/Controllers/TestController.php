@@ -18,14 +18,4 @@ class TestController extends Controller
             'item3' => 3,
         ]);
     }
-
-    /**
-     * @param int $id
-     */
-    public function itemAction(int $id)
-    {
-        $this->response->setJsonContent([
-            'item_id' => $id,
-        ]);
-    }
 }

@@ -85,7 +85,9 @@ class Dispatcher implements DispatcherInterface
     private function setRouteByUrl(?string $url)
     {
         foreach ($this->group->getRoutes() as $route) {
-            if (preg_match('#^/' . $route->getPattern() . '$#isu', $url, $matches)) {
+            if (preg_match('#^/' . $route->getPattern() . '$#isu', $url, $matches) &&
+                $this->request->getMethod() === $route->getMethod()
+            ) {
                 $this->route = $route;
                 if (is_array($matches)) {
                     $this->params = array_slice($matches, 1);

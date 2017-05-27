@@ -15,7 +15,7 @@ class Response implements ResponseInterface, ContentInterface
     /**
      * @var array
      */
-    private static $сodeMessages = [
+    private static $messages = [
         // INFORMATIONAL CODES
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -133,7 +133,7 @@ class Response implements ResponseInterface, ContentInterface
     public function setStatusCode(int $code, ?string $message = null): ResponseInterface
     {
         if ($message === null) {
-            $message = static::$сodeMessages[$code] ?? null;
+            $message = static::$messages[$code] ?? null;
         }
 
         return $this->setHeader('HTTP/1.0 ' . $code . ' ' . $message)

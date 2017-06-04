@@ -2,48 +2,31 @@
 
 namespace App\Database;
 
+use App\Database\Query\QueryInterface;
+
 /**
  * Interface ConnectionInterface
  */
 interface ConnectionInterface
 {
     /**
-     * @param string $query
-     * @param array $bindings
+     * @param QueryInterface $query
      *
      * @return array
      */
-    public function selectOne(string $query, array $bindings = []): array;
+    public static function selectOne(QueryInterface $query): array;
 
     /**
-     * @param string $query
-     * @param array $bindings
+     * @param QueryInterface $query
      *
      * @return array
      */
-    public function select(string $query, array $bindings = []): array;
+    public static function selectAll(QueryInterface $query): array;
 
     /**
-     * @param string $query
-     * @param array $bindings
-     *
-     * @return bool
-     */
-    public function insert(string $query, array $bindings = []): bool;
-
-    /**
-     * @param string $query
-     * @param array $bindings
+     * @param QueryInterface $query
      *
      * @return int
      */
-    public function update(string $query, array $bindings = []): int;
-
-    /**
-     * @param string $query
-     * @param array $bindings
-     *
-     * @return int
-     */
-    public function delete(string $query, array $bindings = []): int;
+    public static function execute(QueryInterface $query): int;
 }

@@ -2,7 +2,9 @@
 
 namespace App\Database;
 
+use App\Database\Query\QueryInterface;
 use PDO;
+use PDOStatement;
 
 /**
  * Class Connection
@@ -15,6 +17,11 @@ class Connection implements ConnectionInterface
     private $pdo;
 
     /**
+     * @var Connection
+     */
+    private static $instance;
+
+    /**
      * Connection constructor.
      *
      * @param string $host
@@ -22,7 +29,7 @@ class Connection implements ConnectionInterface
      * @param string $user
      * @param string $password
      */
-    public function __construct(string $host, string $database, string $user, string $password)
+    private function __construct(string $host, string $database, string $user, string $password)
     {
         $this->pdo = new PDO('mysql:host=' . $host . ';dbname=' . $database, $user, $password, [
             PDO::ATTR_CASE => PDO::CASE_NATURAL,
@@ -34,58 +41,73 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @param string $query
-     * @param array $bindings
+     * @return Connection
+     */
+    public static function getInstance(): Connection
+    {
+        if (!static::$instance) {
+            static::$instance = new self(
+                getenv('DB_HOST'),
+                getenv('DB_DATABASE'),
+                getenv('DB_USER'),
+                getenv('DB_PASSWORD')
+            );
+        }
+
+        return static::$instance;
+    }
+
+    /**
+     * @param QueryInterface $query
      *
      * @return array
      */
-    public function selectOne(string $query, array $bindings = []): array
+    public static function selectOne(QueryInterface $query): array
     {
-        return [];
+        return self::query($query)->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
-     * @param string $query
-     * @param array $bindings
+     * @param QueryInterface $query
      *
      * @return array
      */
-    public function select(string $query, array $bindings = []): array
+    public static function selectAll(QueryInterface $query): array
     {
-        return [];
+        return self::query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
-     * @param string $query
-     * @param array $bindings
-     *
-     * @return bool
-     */
-    public function insert(string $query, array $bindings = []): bool
-    {
-        return false;
-    }
-
-    /**
-     * @param string $query
-     * @param array $bindings
+     * @param QueryInterface $query
      *
      * @return int
      */
-    public function update(string $query, array $bindings = []): int
+    public static function execute(QueryInterface $query): int
     {
-        return 0;
+        return self::query($query)->execute();
     }
 
+    /**
+     * @param QueryInterface $query
+     *
+     * @return PDOStatement
+     */
+    private static function query(QueryInterface $query): PDOStatement
+    {
+        $stmt = self::getInstance()->getPDO()->prepare($query->getQuery(), [
+            PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY,
+        ]);
+
+        $stmt->execute($query->getBinds());
+
+        return $stmt;
+    }
 
     /**
-     * @param string $query
-     * @param array $bindings
-     *
-     * @return int
+     * @return PDO
      */
-    public function delete(string $query, array $bindings = []): int
+    public function getPDO(): PDO
     {
-        return 0;
+        return $this->pdo;
     }
 }
